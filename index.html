@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Invitación a la graduación de Jerson Cos - Ingeniero en Sistemas, 29 de octubre de 2025" />
+  <meta property="og:title" content="Graduación Ing. Jerson Cos" />
+  <meta property="og:description" content="Te invito a celebrar mi graduación como Ingeniero en Sistemas" />
+  <meta property="og:type" content="website" />
+  <title>Graduación – Ing. Jerson Cos</title>
+  <style>
+    :root {
+      --azul: #0d1b2a;
+      --gris: #e0e0e0;
+      --blanco: #ffffff;
+      --dorado: #d4af37;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", Tahoma, sans-serif; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      color: var(--blanco);
+      background-color: var(--azul);
+      overflow-x: hidden;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* --- Pantalla inicial --- */
+    .intro-screen {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0d1b2a, #1b263b);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .intro-screen h1 {
+      color: var(--dorado);
+      font-size: clamp(1.5rem, 5vw, 1.8rem);
+      margin-bottom: 25px;
+      animation: fadeIn 2s ease;
+    }
+
+    .scroll-btn {
+      background-color: var(--dorado);
+      color: var(--azul);
+      border: none;
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      font-weight: bold;
+      padding: 15px 35px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: bounce 1.8s infinite;
+    }
+
+    .scroll-btn:hover, .scroll-btn:focus {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+      outline: 2px solid var(--dorado);
+      outline-offset: 3px;
+    }
+
+    @keyframes bounce {
+      0%,20%,50%,80%,100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- Parallax ---- */
+    .parallax {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .parallax-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 120%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      will-change: transform;
+      z-index: 0;
+    }
+
+    .overlay {
+      background-color: rgba(13,27,42,0.75);
+      width: 100%;
+      padding: 60px 5%;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1, h2 { 
+      color: var(--dorado); 
+      text-shadow: 0 2px 6px rgba(0,0,0,0.6); 
+      margin-bottom: 15px;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+    }
+    
+    p { 
+      color: var(--gris); 
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+      margin-bottom: 10px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .countdown {
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      margin-top: 20px;
+      color: var(--blanco);
+      text-shadow: 0 1px 8px rgba(0,0,0,0.7);
+      font-weight: bold;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--dorado);
+      color: var(--azul);
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+      transition: background 0.3s ease, transform 0.2s;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+    }
+
+    .btn:hover, .btn:focus {
+      background-color: #f0d97a;
+      transform: scale(1.05);
+      outline: 2px solid var(--blanco);
+      outline-offset: 3px;
+    }
+
+    footer {
+      background-color: rgba(13,27,42,0.95);
+      padding: 40px 20px;
+      color: var(--gris);
+      border-top: 2px solid var(--dorado);
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+    }
+    
+    footer span { color: var(--dorado); }
+
+    .fade { 
+      opacity: 0; 
+      transform: translateY(40px); 
+      transition: opacity 1s ease, transform 1s ease; 
+    }
+    
+    .fade.visible { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+
+    /* --- Calendario visual (Save the Date) --- */
+    .calendar-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 2px solid var(--dorado);
+      border-radius: 12px;
+      display: inline-block;
+      padding: 25px 40px;
+      margin: 20px auto;
+      text-align: center;
+      color: var(--blanco);
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .calendar-card:hover {
+      transform: scale(1.05);
+    }
+
+    .calendar-card .month {
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      color: var(--dorado);
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .calendar-card .day {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: bold;
+      color: var(--blanco);
+      margin: 5px 0;
+    }
+
+    .calendar-card .weekday {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--gris);
+      margin-bottom: 5px;
+    }
+
+    .calendar-card .time {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--dorado);
+      font-weight: bold;
+    }
+
+    /* --- Responsividad --- */
+    @media (max-width: 768px) {
+      .overlay {
+        padding: 40px 5%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .overlay {
+        padding: 30px 5%;
+      }
+    }
+
+    *:focus-visible {
+      outline: 2px solid var(--dorado);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PANTALLA DE ENTRADA -->
+  <section class="intro-screen">
+    <h1>📩 Invitación a mi graduación</h1>
+    <button class="scroll-btn" id="openBtn" aria-label="Ver invitación completa">Clic aquí</button>
+  </section>
+
+  <!-- PARALLAX 1: Portada -->
+  <div class="parallax" id="portada" data-parallax="0.5">
+    <div class="parallax-bg" style="background-image: url('img/Graduacion1.jpg');"></div>
+    <div class="overlay fade">
+      <h1>Graduación de Ingeniero en Sistemas</h1>
+      <p><strong>Jerson Cos</strong></p>
+      <p>Miércoles 29 de octubre de 2025 · 9:30 a. m.</p>
+      <div class="countdown" id="countdown" role="timer" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- PARALLAX 2: Detalles -->
+  <div class="parallax" data-parallax="0.5">
+    <div class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1950&q=80');"></div>
+    <div class="overlay fade">
+      <h2>Detalles del evento</h2>
+      <p>📍 <strong>Ubicación:</strong> Diagonal 34 31-43 Zona 16, Ciudad de Guatemala</p>
+      <p>🎩 <strong>Vestimenta:</strong> Formal</p>
+      <a href="https://ul.waze.com/ul?venue_id=176619666.1766393270.1374344&overview=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="btn"
+         aria-label="Abrir ubicación en Waze">Ver ubicación en Waze</a>
+    </div>
+  </div>
+
+  <!-- PARALLAX 3: Save the Date -->
+  <div class="parallax" data-parallax="0.5">
+    <div class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1950&q=80');"></div>
+    <div class="overlay fade">
+      <h2>Save the Date</h2>
+      <p>📅 Reserva esta fecha tan especial en tu calendario.</p>
+
+      <div class="calendar-card">
+        <div class="month">OCTUBRE 2025</div>
+        <div class="day">29</div>
+        <div class="weekday">Miércoles</div>
+        <div class="time">9:30 a. m.</div>
+      </div>
+
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Graduaci%C3%B3n+de+Ingeniero+en+Sistemas+-+Jerson+Cos&dates=20251029T093000-0600/20251029T113000-0600&details=Te+invito+a+celebrar+mi+graduaci%C3%B3n+como+Ingeniero+en+Sistemas&location=Diagonal+34+31-43+Zona+16,+Ciudad+de+Guatemala&sf=true&output=xml"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="btn"
+         aria-label="Guardar evento en Google Calendar">
+         Guardar en Google Calendar
+      </a>
+    </div>
+  </div>
+
+  <!-- PARALLAX 4: Confirmar asistencia -->
+  <div class="parallax" data-parallax="0.5">
+    <div class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1531306728370-ee66f3b6e89e?auto=format&fit=crop&w=1950&q=80');"></div>
+    <div class="overlay fade">
+      <h2>Confirmar asistencia</h2>
+      <p>Tu presencia hará especial este día.<br>Por favor confirma tu asistencia a través de WhatsApp.</p>
+      <a href="https://wa.me/50255554444?text=¡Hola%20Jerson!%20Confirmo%20mi%20asistencia%20a%20tu%20graduación%20el%2029%20de%20octubre." 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="btn"
+         aria-label="Confirmar asistencia por WhatsApp">Confirmar por WhatsApp</a>
+    </div>
+  </div>
+
+  <footer>
+    <p><span>Gracias</span> por acompañarme en este logro tan importante.<br>
+       Tu apoyo ha sido parte esencial de mi camino profesional.<br>
+       — Jerson Cos 🎓</p>
+  </footer>
+
+  <script>
+    const CONFIG = {
+      targetDate: new Date('2025-10-29T09:30:00-06:00').getTime()
+    };
+
+    /* Parallax */
+    let ticking = false;
+    const parallaxSections = document.querySelectorAll('.parallax');
+    function updateParallax() {
+      parallaxSections.forEach(section => {
+        const speed = parseFloat(section.dataset.parallax) || 0.5;
+        const rect = section.getBoundingClientRect();
+        const scrolled = window.pageYOffset;
+        const sectionTop = section.offsetTop;
+        const bg = section.querySelector('.parallax-bg');
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          const yPos = (scrolled - sectionTop) * speed;
+          bg.style.transform = `translate3d(0, ${yPos}px, 0)`;
+        }
+      });
+      ticking = false;
+    }
+    function requestParallax() {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', requestParallax);
+    window.addEventListener('resize', requestParallax);
+    updateParallax();
+
+    /* Scroll suave desde intro */
+    document.getElementById("openBtn").addEventListener("click", () => {
+      document.getElementById("portada").scrollIntoView({ behavior: "smooth" });
+    });
+
+    /* Contador regresivo */
+    const countdown = document.getElementById('countdown');
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = CONFIG.targetDate - now;
+      if (distance <= 0) {
+        countdown.textContent = "🎉 ¡El gran día ha llegado! 🎉";
+        clearInterval(countdownInterval);
+        return;
+      }
+      const days = Math.floor(distance / (1000*60*60*24));
+      const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+      const mins = Math.floor((distance % (1000*60*60)) / (1000*60));
+      const secs = Math.floor((distance % (1000*60)) / 1000);
+      countdown.textContent = `${days}d ${hours}h ${mins}m ${secs}s`;
+    }
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    /* Fade-in */
+    const overlays = document.querySelectorAll(".overlay");
+    function checkFade() {
+      const trigger = window.innerHeight * 0.85;
+      overlays.forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+        if (top < trigger) sec.classList.add("visible");
+      });
+    }
+    window.addEventListener("scroll", checkFade);
+    checkFade();
+  </script>
+</body>
+</html>
